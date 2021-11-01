@@ -1,10 +1,16 @@
-import React, {useContext} from 'react';
+import React, {FC, useContext} from 'react';
 import {ToastContext} from "../context/ToastContext";
-import style from './Toast.module.scss';
+import './Toast.css';
 import {ToastType} from "../context/context-types";
-import {FaCheck, FaExclamationCircle, FaExclamationTriangle, FaInfoCircle} from "react-icons/all";
+import {FaCheck, FaExclamationCircle, FaExclamationTriangle, FaInfoCircle, FaRegWindowClose} from "react-icons/all";
 
-export const Toast = () => {
+type ToastPropsType = {
+    position: string
+}
+
+export const Toast: FC<ToastPropsType> = props => {
+    const {position} = props
+
     const [state, dispatch] = useContext(ToastContext);
 
     const generateIcon = (type: ToastType) => {
@@ -21,18 +27,37 @@ export const Toast = () => {
                 return
         }
     }
+    const generateBackgroundColor = (type: ToastType) => {
+        switch (type) {
+            case 'SUCCESS':
+                return '#2AA80AFF'
+            case 'INFO':
+                return '#10b795'
+            case 'WARNING':
+                return '#CCAA07FF'
+            case 'ERROR':
+                return '#CC0707FF'
+            default:
+                return
+        }
+    }
 
     return (
-        <div className={style.notificationContainer}>
+        <div className={`notification-container ${position}`}>
             {state.map((n, index) => {
                 return (
-                    <div key={n.id} className={style.toast}>
-                        <div className={style.notificationImage}>
+                    <div
+                        key={n.id}
+                        className='notification toast'
+                        style={{backgroundColor: generateBackgroundColor(n.type)}}
+                    >
+                        <FaRegWindowClose className='close-button'/>
+                        <div className='notification-image'>
                             {generateIcon(n.type)}
                         </div>
                         <div>
-                            <p className={style.notificationTitle}>{n.title}</p>
-                            <p className={style.notificationMessage}>{n.message}</p>
+                            <p className='notification-title'>{n.title}</p>
+                            <p className='notification-message'>{n.message}</p>
                         </div>
                     </div>
                 )

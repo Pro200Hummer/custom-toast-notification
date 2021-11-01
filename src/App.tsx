@@ -4,7 +4,7 @@ import {Toast} from "./components/Toast";
 export const App = () => {
     return (
         <div>
-            <Toast/>
+            <Toast position={'top-left'}/>
         </div>
     );
 };
