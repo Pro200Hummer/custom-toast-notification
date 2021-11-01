@@ -12,6 +12,24 @@ export const ToastContextProvider = (props: any) => {
             type: 'SUCCESS',
             title: 'Successfully fetched data',
             message: 'Successfully retrieved all posts'
+        },
+        {
+            id: v1(),
+            type: 'ERROR',
+            title: 'Error title',
+            message: 'This is errormessage'
+        },
+        {
+            id: v1(),
+            type: 'INFO',
+            title: 'Info title',
+            message: 'This is info message'
+        },
+        {
+            id: v1(),
+            type: 'WARNING',
+            title: 'Warning title',
+            message: 'This is warning message'
         }
     ]
 

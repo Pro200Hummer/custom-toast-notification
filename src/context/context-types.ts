@@ -1,4 +1,4 @@
-export type ToastType = 'SUCCESS' | 'DANGER' | 'INFO' | 'WARNING'
+export type ToastType = 'SUCCESS' | 'ERROR' | 'INFO' | 'WARNING'
 export type NotificationType = {
     id: string
     type: ToastType
