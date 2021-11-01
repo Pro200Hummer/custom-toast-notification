@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import {App} from './App';
 import reportWebVitals from './reportWebVitals';
+import {ToastContextProvider} from "./context/toastContext";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ToastContextProvider>
     <App />
-  </React.StrictMode>,
+  </ToastContextProvider>,
   document.getElementById('root')
 );
 
