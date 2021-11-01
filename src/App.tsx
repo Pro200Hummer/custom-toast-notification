@@ -1,10 +1,11 @@
-import React, {useContext} from 'react';
+import React, {ChangeEvent, useContext, useState} from 'react';
 import {Toast} from "./components/Toast";
 import {ToastContext} from "./context/ToastContext";
 import {ActionType} from "./context/context-types";
 import {v1} from "uuid";
 
 export const App = () => {
+    const [position, setPosition] = useState<string>('top-left')
     const [, dispatch] = useContext(ToastContext)
 
     const buttonHandler = (type: string) => {
@@ -32,6 +33,10 @@ export const App = () => {
         }
     }
 
+    const positionHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+        setPosition(e.currentTarget.value)
+    }
+
     return (
         <div>
             <div className='main-content'>
@@ -39,8 +44,14 @@ export const App = () => {
                 <button onClick={() => buttonHandler('ERROR')}>ERROR</button>
                 <button onClick={() => buttonHandler('INFO')}>INFO</button>
                 <button onClick={() => buttonHandler('WARNING')}>WARNING</button>
+                <select name="position-selector" value={position} onChange={positionHandler}>
+                    <option value="top-left">Top-Left</option>
+                    <option value="top-right">Top-Right</option>
+                    <option value="bottom-left">Bottom-Left</option>
+                    <option value="bottom-right">Bottom-Right</option>
+                </select>
             </div>
-            <Toast position={'bottom-left'} autoDeleteInterval={3000}/>
+            <Toast position={position} autoDeleteInterval={3000}/>
         </div>
     );
 };
