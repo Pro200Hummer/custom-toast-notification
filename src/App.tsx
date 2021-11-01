@@ -40,7 +40,7 @@ export const App = () => {
                 <button onClick={() => buttonHandler('INFO')}>INFO</button>
                 <button onClick={() => buttonHandler('WARNING')}>WARNING</button>
             </div>
-            <Toast position={'bottom-left'}/>
+            <Toast position={'bottom-left'} autoDeleteInterval={3000}/>
         </div>
     );
 };

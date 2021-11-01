@@ -6,10 +6,11 @@ import {FaCheck, FaExclamationCircle, FaExclamationTriangle, FaInfoCircle, FaReg
 
 type ToastPropsType = {
     position: string
+    autoDeleteInterval: number
 }
 
 export const Toast: FC<ToastPropsType> = props => {
-    const {position} = props
+    const {position, autoDeleteInterval} = props
 
     const [state, dispatch] = useContext(ToastContext);
 
@@ -49,6 +50,9 @@ export const Toast: FC<ToastPropsType> = props => {
     return (
         <div className={`notification-container ${position}`}>
             {state.map(n => {
+                setTimeout(() => {
+                    deleteToast(n.id)
+                }, autoDeleteInterval)
                 return (
                     <div
                         key={n.id}
