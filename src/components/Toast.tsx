@@ -1,7 +1,7 @@
 import React, {FC, useContext} from 'react';
 import {ToastContext} from "../context/ToastContext";
 import './Toast.css';
-import {ToastType} from "../context/context-types";
+import {ActionType, ToastType} from "../context/context-types";
 import {FaCheck, FaExclamationCircle, FaExclamationTriangle, FaInfoCircle, FaRegWindowClose} from "react-icons/all";
 
 type ToastPropsType = {
@@ -42,16 +42,20 @@ export const Toast: FC<ToastPropsType> = props => {
         }
     }
 
+    const deleteToast = (id: string) => {
+        dispatch({type: ActionType.DELETE_NOTIFICATION, payload: id})
+    }
+
     return (
         <div className={`notification-container ${position}`}>
-            {state.map((n, index) => {
+            {state.map(n => {
                 return (
                     <div
                         key={n.id}
                         className='notification toast'
                         style={{backgroundColor: generateBackgroundColor(n.type)}}
                     >
-                        <FaRegWindowClose className='close-button'/>
+                        <FaRegWindowClose className='close-button' onClick={() => deleteToast(n.id)}/>
                         <div className='notification-image'>
                             {generateIcon(n.type)}
                         </div>
