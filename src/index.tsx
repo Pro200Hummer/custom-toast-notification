@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
 import reportWebVitals from './reportWebVitals';
-import {ToastContextProvider} from "./context/toastContext";
+import {ToastContextProvider} from "./context/ToastContext";
 
 ReactDOM.render(
   <ToastContextProvider>

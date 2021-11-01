@@ -1,8 +1,8 @@
-import React, {createContext, useReducer} from 'react';
+import React, {createContext, Dispatch, useReducer} from 'react';
+import {Notifications, NotificationType, ToastActions} from "./context-types";
 import {v1} from 'uuid';
-import {Notifications, NotificationType} from "./context-types";
 
-export const ToastContext = createContext<Notifications>([]);
+export const ToastContext = createContext<[Notifications, Dispatch<ToastActions>]>([[], () => {}]);
 
 export const ToastContextProvider = (props: any) => {
 
@@ -15,7 +15,7 @@ export const ToastContextProvider = (props: any) => {
         }
     ]
 
-    const [state, dispatch] = useReducer((state: Notifications, action: ActionsType) => {
+    const [state, dispatch] = useReducer((state: Notifications, action: ToastActions) => {
         switch (action.type) {
             case 'ADD_NOTIFICATION':
                 return state
@@ -26,16 +26,12 @@ export const ToastContextProvider = (props: any) => {
         }
     }, notifications)
 
-    type ActionsType =
-        | ReturnType<typeof addNotification>
-        | ReturnType<typeof deleteNotification>
-
     const addNotification = (params: NotificationType) =>
-        ({type: 'ADD_NOTIFICATION', payload: {...params}} as const)
-    const deleteNotification = (id: string) => ({type: 'DELETE_NOTIFICATION', payload: id} as const)
+        ({type: 'ADD_NOTIFICATION', payload: {...params}})
+    const deleteNotification = (id: string) => ({type: 'DELETE_NOTIFICATION', payload: id})
 
     return (
-        <ToastContext.Provider value={notifications}>
+        <ToastContext.Provider value={[state, dispatch]}>
             {props.children}
         </ToastContext.Provider>
     )
