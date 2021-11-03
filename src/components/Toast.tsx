@@ -1,4 +1,4 @@
-import React, {FC, useContext} from 'react';
+import React, {FC, memo, useCallback, useContext} from 'react';
 import {ToastContext} from "../context/ToastContext";
 import './Toast.css';
 import {ActionType, ToastType} from "../context/context-types";
@@ -9,7 +9,9 @@ type ToastPropsType = {
     autoDeleteInterval: number
 }
 
-export const Toast: FC<ToastPropsType> = props => {
+export const Toast: FC<ToastPropsType> = memo(props => {
+    console.log("Toast render")
+    debugger
     const {position, autoDeleteInterval} = props
 
     const [state, dispatch] = useContext(ToastContext);
@@ -43,9 +45,9 @@ export const Toast: FC<ToastPropsType> = props => {
         }
     }
 
-    const deleteToast = (id: string) => {
+    const deleteToast = useCallback((id: string) => {
         dispatch({type: ActionType.DELETE_NOTIFICATION, payload: id})
-    }
+    },[dispatch])
 
     return (
         <div className={`notification-container ${position}`}>
@@ -72,4 +74,4 @@ export const Toast: FC<ToastPropsType> = props => {
             })}
         </div>
     )
-};
+});

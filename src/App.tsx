@@ -3,6 +3,7 @@ import {Toast} from "./components/Toast";
 import {ToastContext} from "./context/ToastContext";
 import {ActionType} from "./context/context-types";
 import {v1} from "uuid";
+import "./Main.css";
 
 export const App = () => {
     const [position, setPosition] = useState<string>('top-left')
@@ -38,13 +39,20 @@ export const App = () => {
     }
 
     return (
-        <div>
+        <div className='wrapper'>
             <div className='main-content'>
-                <button onClick={() => buttonHandler('SUCCESS')}>SUCCESS</button>
-                <button onClick={() => buttonHandler('ERROR')}>ERROR</button>
-                <button onClick={() => buttonHandler('INFO')}>INFO</button>
-                <button onClick={() => buttonHandler('WARNING')}>WARNING</button>
-                <select name="position-selector" value={position} onChange={positionHandler}>
+                <div className='buttons'>
+                    <button onClick={() => buttonHandler('SUCCESS')} className='btn-success'>SUCCESS</button>
+                    <button onClick={() => buttonHandler('ERROR')} className='btn-error'>ERROR</button>
+                    <button onClick={() => buttonHandler('INFO')} className='btn-info'>INFO</button>
+                    <button onClick={() => buttonHandler('WARNING')} className='btn-warning'>WARNING</button>
+                </div>
+                <select
+                    name="position-selector"
+                    value={position}
+                    onChange={positionHandler}
+                    className='position-select'
+                >
                     <option value="top-left">Top-Left</option>
                     <option value="top-right">Top-Right</option>
                     <option value="bottom-left">Bottom-Left</option>
