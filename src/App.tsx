@@ -6,6 +6,7 @@ import {v1} from "uuid";
 import "./Main.css";
 
 export const App = () => {
+    console.log("App rendered")
     const [position, setPosition] = useState<string>('top-left')
     const [, dispatch] = useContext(ToastContext)
 

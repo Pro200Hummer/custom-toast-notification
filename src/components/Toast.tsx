@@ -10,8 +10,6 @@ type ToastPropsType = {
 }
 
 export const Toast: FC<ToastPropsType> = memo(props => {
-    console.log("Toast render")
-    debugger
     const {position, autoDeleteInterval} = props
 
     const [state, dispatch] = useContext(ToastContext);
@@ -47,7 +45,7 @@ export const Toast: FC<ToastPropsType> = memo(props => {
 
     const deleteToast = useCallback((id: string) => {
         dispatch({type: ActionType.DELETE_NOTIFICATION, payload: id})
-    },[dispatch])
+    }, [dispatch])
 
     return (
         <div className={`notification-container ${position}`}>
