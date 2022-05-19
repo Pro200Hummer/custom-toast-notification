@@ -5,6 +5,10 @@ import {ActionType} from "./context/context-types";
 import {v1} from "uuid";
 import "./Main.css";
 
+
+/**
+ * Add any test comment
+ * */
 export const App = () => {
     console.log("App rendered")
     const [position, setPosition] = useState<string>('top-left')
