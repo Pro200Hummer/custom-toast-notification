@@ -8,6 +8,7 @@ import "./Main.css";
 
 /**
  * Add any test comment
+ * Add test commit
  * */
 export const App = () => {
     console.log("App rendered")
